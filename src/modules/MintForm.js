@@ -1,33 +1,22 @@
-import React, { Component, useState } from "react";
+import { useState } from "react";
 import Web3 from "web3";
-import mockABI from "../abis/Mock";
+import DemonzABI from "../abis/Demonz";
 
 const MintForm = ({ account, active }) => {
-    const web3 = new Web3(
-        window.ethereum
-    );
+    const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(
-        mockABI,
-        "0x4231AF7A21fF267d86Bf23032632E6726EB51e33"
+        DemonzABI,
+        "0xAE16529eD90FAfc927D774Ea7bE1b95D826664E3"
     );
-    const [value, setV] = React.useState(0);
-
     const [ethPrice, setEthPrice] = useState(1);
+    const [amount, setAmount] = useState(1);
 
-    /*
-    React.useEffect(() => {
-        const init = async () => {
-            const value = await contract.methods.getValue().call();
-            setValue(value);
-        }
-        init();
-    }, [])
-    */
-
-    const setValue = async () => {
+    const buyToken = async () => {
         if (active) {
             try {
-                await contract.methods.setValue(20).send({ from: account });
+                await contract.methods
+                    .mintToken(amount)
+                    .send({ from: account, value: amount * 60000000000000000 });
             } catch (err) {
                 console.log(err);
             }
@@ -35,8 +24,13 @@ const MintForm = ({ account, active }) => {
             alert("please connect to metamask");
         }
     };
-
-
+    const checkValue = () => {
+        if (ethPrice <= 0) {
+            setEthPrice(1);
+        } else if (ethPrice > 20) {
+            setEthPrice(20);
+        }
+    };
     return (
         <div className="row">
             <div className="col-lg-12 form-tabbed">
@@ -58,6 +52,7 @@ const MintForm = ({ account, active }) => {
                     <div className="row">
                         <div className="col-md-5 text-center">
                             <div class="input-group mb-3">
+                                {checkValue()}
                                 <input
                                     type="number"
                                     className="form-control number-custom"
@@ -65,8 +60,11 @@ const MintForm = ({ account, active }) => {
                                     min="1"
                                     max="20"
                                     placeholder=""
-                                    defaultValue="1"
-                                    onChange={event => setEthPrice(event.target.value)}
+                                    value={ethPrice}
+                                    onChange={(event) => {
+                                        setEthPrice(event.target.value);
+                                        setAmount(event.target.value);
+                                    }}
                                 />
                                 <span class="input-group-text">NFT</span>
                             </div>
@@ -87,14 +85,12 @@ const MintForm = ({ account, active }) => {
                                     placeholder=""
                                     defaultValue="1"
                                     disabled
-                             
                                     value={ethPrice * 0.06}
                                 />
                                 <span class="input-group-text">ETH</span>
                             </div>
                         </div>
                     </div>
-
 
                     <p>
                         <small>(Maximum of 20)</small>
@@ -103,7 +99,7 @@ const MintForm = ({ account, active }) => {
                     <button
                         type="button"
                         className="btn btn-primary"
-                        onClick={setValue}
+                        onClick={buyToken}
                     >
                         Confirm
                     </button>

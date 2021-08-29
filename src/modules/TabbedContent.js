@@ -36,7 +36,7 @@ function TabbedContent({ account, active }) {
                             <MintForm account={account} active={active} />
                         </div>
                         <div className="tab-pane fade" id="profile">
-                            <PresaleForm />
+                            <PresaleForm account={account} active={active} />
                         </div>
                     </div>
                 </div>
