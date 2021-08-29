@@ -12,7 +12,7 @@ function Navbar() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse me-auto" id="navbarColor02">
+                <div className="collapse navbar-collapse me-auto text-center" id="navbarColor02">
                     <ul className="navbar-nav navbar-right ms-auto">
                             <li className="nav-item mr-5">
                                 <a className="nav-link" href="https://cryptodemonz.com/">HOME</a>

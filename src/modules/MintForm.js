@@ -2,12 +2,20 @@ const MintForm = () => {
 
 
     return (
-        <div class="form-group form-tabbed m-auto">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-
-            <button type="button" class="btn btn-primary">Primary</button>
+        <div className="row">
+            <div className="col-lg-8 form-tabbed">
+                <div className="form-group text-center">
+                    <label htmlFor="exampleInputEmail1">
+                        <img src="images/welcome.gif" className="welcome-gif" alt="Welcome to the minting section" />
+                        <h1><u>Minting</u></h1>
+                        <p>Please enter the amount of Crypto Demonz you would like to mint</p>
+                    </label>
+                    <input type="number" className="form-control number-custom" id="exampleInputEmail1" min="1" max="20" placeholder="" defaultValue="1" />
+                    <p><small>(Maximum of 20)</small></p>
+                    <br />
+                    <button type="button" className="btn btn-primary">Confirm</button>
+                </div>
+            </div>
         </div>
     )
 
