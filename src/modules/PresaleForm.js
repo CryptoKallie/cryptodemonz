@@ -2,7 +2,7 @@ const PresaleForm = () => {
 
     return (
         <div className="row">
-            <div className="col-lg-8 form-tabbed">
+            <div className="col-lg-12 form-tabbed">
                 <div className="form-group text-center">
                     <label htmlFor="exampleInputEmail1">
                         <img src="images/Satan.gif" className="welcome-gif" alt="Welcome to the minting section" />

@@ -3,15 +3,20 @@
     font-style: normal;
     font-weight: normal;
     src: local('Singo Regular'), url('Singo-eZnze.woff') format('woff');
-    }
+}
     
+@font-face {
+font-family: 'Singo Italic';
+font-style: normal;
+font-weight: normal;
+src: local('Singo Italic'), url('SingoItalic-WymEV.woff') format('woff');
+}
 
-    @font-face {
-    font-family: 'Singo Italic';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Singo Italic'), url('SingoItalic-WymEV.woff') format('woff');
+@media (min-width: 1200px) {
+    .container{
+        max-width: 800px;
     }
+}
 
 body {
     background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('/images/wallpaper.gif');
@@ -22,6 +27,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
     background-color: black;
+    background-attachment: fixed;
     height: 100vh;
 }
 .background-image {
@@ -174,4 +180,8 @@ input[type=number]{
     border-radius: 9px;
     font-size: 25px;
     border: 1px solid #853aaa;
+}
+
+.custom-dropdown {
+    background-color: #3a1a4b;
 }
