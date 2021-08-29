@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'Singo Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Singo Regular'), url('Singo-eZnze.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Singo Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Singo Italic'), url('SingoItalic-WymEV.woff') format('woff');
+    }
+
+body {
+    background-color: #0b0b0b;
+}
+.navbar-transparent { 
+
+    background-color:rgba(0, 0, 0, 0.8) !important; 
+}
+.navbar-logo {
+    width: 300px;
+}
+.nav-link {
+    color: #853aaa !important;
+    font-family: Singo Regular;
+    font-size: 44px;
+    transition: 0.5s;
+}
+.nav-link:hover {
+    color: #ffffff !important;
+    font-family: Singo Regular;
+    font-size: 44px;
+    transition: 0.5s;
+}
+.navbar-nav > li{
+    padding-left:30px;
+    padding-right:30px;
+  }
