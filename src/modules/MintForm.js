@@ -4,7 +4,7 @@ import mockABI from "../abis/Mock";
 
 const MintForm = ({ account, active }) => {
     const web3 = new Web3(
-        "https://goerli.infura.io/v3/23d7ffac33de4db4bafbf70d24cb10f6"
+        window.ethereum
     );
     const contract = new web3.eth.Contract(
         mockABI,
@@ -22,7 +22,6 @@ const MintForm = ({ account, active }) => {
     }, [])
     */
 
-    //THROWS ERROR, Infura wont pass normal transaction
     const setValue = async () => {
         if (active) {
             try {
