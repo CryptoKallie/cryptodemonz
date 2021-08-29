@@ -1,4 +1,4 @@
-import { useWeb3React, Web3ReactProvider } from '@web3-react/core';
+import { useWeb3React } from '@web3-react/core';
 import { injected } from './connectors.js';
 
 const ConnectMetamask = () => {
@@ -6,12 +6,8 @@ const ConnectMetamask = () => {
     
 
     const connectMetamask = async () => {
-        try { 
-            await activate(injected);
-        }
-        catch (err) {
-            console.log(err)
-        }
+        await activate(injected)
+        
     }
 
     const deactivateMetamask = async () => {
