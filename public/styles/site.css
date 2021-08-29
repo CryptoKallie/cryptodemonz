@@ -202,6 +202,7 @@ input[type=number]{
     text-align: center;
     font-size: 25px;
     margin: auto;
+    color: rgb(124, 124, 124) !important;
 }
 .input-group-text {
     background-color: #592672;

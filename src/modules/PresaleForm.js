@@ -17,15 +17,23 @@ class PresaleForm extends Component {
                             <h1>
                                 <u>Presale</u>
                             </h1>
-                            <input
-                        type="number"
-                        className="form-control number-custom"
-                        id="exampleInputEmail1"
-                        min="1"
-                        max="20"
-                        placeholder=""
-                        defaultValue="1"
-                    />
+                            <p>
+                                Pay your gas fee & claim your presale token
+                            </p>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="number"
+                                    className="form-control number-custom"
+                                    id="exampleInputEmail1"
+                                    min="1"
+                                    max="20"
+                                    placeholder=""
+                                    defaultValue="1"
+                                />
+
+                                <span class="input-group-text">NFT</span>
+                            </div>
+                           
                             <p>Click to claim your tokens!</p>
                         </label>
                         <br />

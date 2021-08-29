@@ -27,7 +27,7 @@ const MintForm = ({ account, active }) => {
     const setValue = async () => {
         if (active) {
             try {
-                await contract.methods.setValue(1).send({ from: account });
+                await contract.methods.setValue(20).send({ from: account });
             } catch (err) {
                 console.log(err);
             }
@@ -36,15 +36,6 @@ const MintForm = ({ account, active }) => {
         }
     };
 
-    const getValue = async () => {
-        const value = await contract.methods.getValue().call();
-        try {
-            setV(value);
-        } catch (err) {
-            console.log(err);
-        }
-        console.log(account);
-    };
 
     return (
         <div className="row">
@@ -66,16 +57,19 @@ const MintForm = ({ account, active }) => {
                     </label>
                     <div className="row">
                         <div className="col-md-5 text-center">
-                            <input
-                                type="number"
-                                className="form-control number-custom"
-                                id="exampleInputEmail1"
-                                min="1"
-                                max="20"
-                                placeholder=""
-                                defaultValue="1"
-                                onChange={event => setEthPrice(event.target.value)}
-                            />
+                            <div class="input-group mb-3">
+                                <input
+                                    type="number"
+                                    className="form-control number-custom"
+                                    id="exampleInputEmail1"
+                                    min="1"
+                                    max="20"
+                                    placeholder=""
+                                    defaultValue="1"
+                                    onChange={event => setEthPrice(event.target.value)}
+                                />
+                                <span class="input-group-text">NFT</span>
+                            </div>
                         </div>
 
                         <div className="col-sm-2 text-center">
@@ -103,23 +97,15 @@ const MintForm = ({ account, active }) => {
 
 
                     <p>
-                        <h1>{value}</h1>
                         <small>(Maximum of 20)</small>
                     </p>
                     <br />
                     <button
                         type="button"
                         className="btn btn-primary"
-                        onClick={getValue}
-                    >
-                        rec
-                    </button>
-                    <button
-                        type="button"
-                        className="btn btn-primary"
                         onClick={setValue}
                     >
-                        send
+                        Confirm
                     </button>
                 </div>
             </div>
