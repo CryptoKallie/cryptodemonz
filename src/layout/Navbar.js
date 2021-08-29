@@ -1,6 +1,8 @@
+import ConnectMetamask from '../utils/metamask';
+
 function Navbar() {
     return (
-        <nav className="navbar navbar-transparent fixed-top py-3 navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-transparent py-2 navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">
                     <img src="images/logo.png" alt="CryptoDemonz logo" className="navbar-logo" />
@@ -13,19 +15,13 @@ function Navbar() {
                 <div className="collapse navbar-collapse me-auto" id="navbarColor02">
                     <ul className="navbar-nav navbar-right ms-auto">
                             <li className="nav-item mr-5">
-                                <a className="nav-link" href="https://cryptodemonz.com/#Spawn">SPAWN</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="https://cryptodemonz.com/#about">ABOUT</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="https://cryptodemonz.com/#tokenomics">TOKENOMICS</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="https://cryptodemonz.com/#socials">ROADMAP</a>
+                                <a className="nav-link" href="https://cryptodemonz.com/">HOME</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="https://cryptodemonz.com/#socials">MINT</a>
+                            </li>
+                            <li className="nav-item">
+                                <ConnectMetamask />
                             </li>
                     </ul>
                 </div>

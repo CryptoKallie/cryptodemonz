@@ -14,7 +14,6 @@
     }
 
 body {
-
     background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('/images/wallpaper.gif');
     background-repeat: no-repeat;
     background-position: center center;
@@ -23,34 +22,46 @@ body {
     -o-background-size: cover;
     background-size: cover;
     background-color: black;
+    height: 100vh;
 }
 .background-image {
     z-index: -1;
 
 }
 .navbar-transparent { 
-    background-color:rgba(0, 0, 0, 0.8) !important; 
+    background-color:rgba(0, 0, 0, 0) !important; 
 }
 .navbar-logo {
-    width: 300px;
+    width: 150px;
 }
 .nav-link {
     color: #853aaa !important;
     font-family: Singo Regular;
-    font-size: 44px;
+    font-size: 30px;
     transition: 0.5s;
 }
 .nav-link:hover {
     color: #ffffff !important;
-    font-family: Singo Regular;
-    font-size: 44px;
     transition: 0.5s;
 }
 .navbar-nav > li{
-    padding-left:30px;
-    padding-right:30px;
+    padding-left:10px;
+    padding-right:10px;
   }
+.card {
+    border: 0px;
+    background-color: black;
+}
+.card-body {
+    background-color: black;
+    border: 0px;
+}
 .container-body {
-    padding-top: 165px;
-    height: 100vh;
+    height: 100%;
+}
+.root {
+    height: 100%;
+}
+.tabbed {
+    background-color: #853aaa;
 }

@@ -1,12 +1,12 @@
-import ConnectMetamask from './utils/metamask';
 import Navbar from './layout/Navbar';
+import TabbedContent from './modules/TabbedContent';
 
 function App() {
   return (
     <div>
       <Navbar />
       <div className="container container-body">
-        <ConnectMetamask />
+        <TabbedContent />
       </div>
     </div>
   );
