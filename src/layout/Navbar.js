@@ -4,7 +4,7 @@ function Navbar() {
     return (
         <nav className="navbar navbar-transparent py-2 navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="https://cryptodemonz.com/">
                     <img src="images/logo.png" alt="CryptoDemonz logo" className="navbar-logo" />
                 </a>
 
@@ -16,9 +16,6 @@ function Navbar() {
                     <ul className="navbar-nav navbar-right ms-auto">
                             <li className="nav-item mr-5">
                                 <a className="nav-link" href="https://cryptodemonz.com/">HOME</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="https://cryptodemonz.com/#socials">MINT</a>
                             </li>
                             <li className="nav-item">
                                 <ConnectMetamask />

@@ -18,11 +18,11 @@ const ConnectMetamask = () => {
     return active ? (
         <div>
             <span>{account}</span>
-            <button onClick={deactivateMetamask}>Disconnect</button>
+            <a className="nav-link meta-connect" href="/#" onClick={deactivateMetamask}>Disconnect</a>
         </div>
     ) : (
         <div>
-            <button onClick={connectMetamask}>Connect</button> 
+            <a className="nav-link meta-connect" href="/#" onClick={connectMetamask}>Connect to Metamask</a> 
         </div>
     )
 }
