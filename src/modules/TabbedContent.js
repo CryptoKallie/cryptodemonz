@@ -1,4 +1,5 @@
 import MintForm from './MintForm';
+import PresaleForm from './PresaleForm';
 
 function TabbedContent() {
     return (
@@ -17,14 +18,10 @@ function TabbedContent() {
 
                         <div id="myTabContent" className="tab-content">
                             <div className="tab-pane fade show active h-40" id="home">
-
                                 <MintForm />
-
-
-
                             </div>
                             <div className="tab-pane fade" id="profile">
-                                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+                                <PresaleForm />
                             </div>
                         </div>
                     </div>
