@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class PresaleForm extends Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         return (
             <div className="row">
@@ -15,6 +19,15 @@ class PresaleForm extends Component {
                             <h1>
                                 <u>Presale</u>
                             </h1>
+                            <input
+                        type="number"
+                        className="form-control number-custom"
+                        id="exampleInputEmail1"
+                        min="1"
+                        max="20"
+                        placeholder=""
+                        defaultValue="1"
+                    />
                             <p>Click to claim your tokens!</p>
                         </label>
                         <br />
