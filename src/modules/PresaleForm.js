@@ -6,7 +6,7 @@ class PresaleForm extends Component {
     render() {
         return (
             <div className="row">
-                <div className="col-lg-8 form-tabbed">
+                <div className="col-lg-12 form-tabbed">
                     <div className="form-group text-center">
                         <label htmlFor="exampleInputEmail1">
                             <img
@@ -34,7 +34,6 @@ class PresaleForm extends Component {
                                 <span class="input-group-text">NFT</span>
                             </div>
                            
-                            <p>Click to claim your tokens!</p>
                         </label>
                         <br />
                         <button type="button" className="btn btn-primary">
