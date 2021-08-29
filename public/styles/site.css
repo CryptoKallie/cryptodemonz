@@ -78,6 +78,7 @@ p {
     color: white;
 }
 .meta-connect {
+    text-align: center;
     border-radius: 15px;
     color: #3a1a4b !important;
     text-shadow: 1px -1px #7c35a3;
@@ -90,7 +91,27 @@ p {
     margin: 7px;
 }
 .meta-connect:hover {
+    text-align: center;
     background-color:rgba(133, 59, 171, 0.8) !important; 
     color: #3a1a4b !important;
     transition: 0.5s;
+}
+.nested-meta {
+    background-color: black;
+    padding: 1px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    opacity: 0.6;
+    text-shadow: 0px;
+    border-top: 1px solid #7c35a3;
+    border-right: 1px solid #7c35a3;
+    margin-left: 5px;
+}
+.form-tabbed {
+    width: 50%;
+    
+}
+label {
+    color: white;
 }

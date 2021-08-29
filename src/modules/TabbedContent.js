@@ -1,3 +1,5 @@
+import MintForm from './MintForm';
+
 function TabbedContent() {
     return (
         <div class="row align-items-center h-100">
@@ -15,7 +17,10 @@ function TabbedContent() {
 
                         <div id="myTabContent" className="tab-content">
                             <div className="tab-pane fade show active h-40" id="home">
-                                <p>data</p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+                                <MintForm />
+
+
 
                             </div>
                             <div className="tab-pane fade" id="profile">
