@@ -1,6 +1,6 @@
 import ConnectMetamask from '../utils/metamask';
 
-function Navbar() {
+function Navbar({ active, account, connectMetamask, deactivateMetamask}) {
     return (
         <nav className="navbar navbar-transparent py-2 navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -18,7 +18,7 @@ function Navbar() {
                                 <a className="nav-link" href="https://cryptodemonz.com/">HOME</a>
                             </li>
                             <li className="nav-item">
-                                <ConnectMetamask />
+                                <ConnectMetamask active={active} account={account} connectMetamask={connectMetamask} deactivateMetamask={deactivateMetamask}/>
                             </li>
                     </ul>
                 </div>

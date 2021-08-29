@@ -1,4 +1,4 @@
-const MintForm = () => {
+const MintForm = ({ account }) => {
 
 
     return (
@@ -14,6 +14,7 @@ const MintForm = () => {
                     <p><small>(Maximum of 20)</small></p>
                     <br />
                     <button type="button" className="btn btn-primary">Confirm</button>
+                    <h1>{account}</h1>
                 </div>
             </div>
         </div>
