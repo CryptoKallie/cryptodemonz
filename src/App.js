@@ -3,14 +3,10 @@ import TabbedContent from "./modules/TabbedContent";
 
 import { useWeb3React } from "@web3-react/core";
 import { injected } from "./utils/connectors.js";
-import Web3 from "web3";
 
 function App() {
     const { active, account, library, connector, activate, deactivate } =
         useWeb3React();
-    const web3 = new Web3(
-        "https://goerli.infura.io/v3/23d7ffac33de4db4bafbf70d24cb10f6"
-    );
 
     const connectMetamask = async () => {
         await activate(injected);
@@ -29,7 +25,7 @@ function App() {
                 deactivateMetamask={deactivateMetamask}
             />
             <div className="container container-body">
-                <TabbedContent account={account} />
+                <TabbedContent account={account} active={active} />
             </div>
         </div>
     );

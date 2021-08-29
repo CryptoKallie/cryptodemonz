@@ -1,7 +1,7 @@
 import MintForm from "./MintForm";
 import PresaleForm from "./PresaleForm";
 
-function TabbedContent({ account }) {
+function TabbedContent({ account, active }) {
     return (
         <div class="row align-items-center h-100">
             <div class="col"></div>
@@ -33,7 +33,7 @@ function TabbedContent({ account }) {
                             className="tab-pane fade show active h-40"
                             id="home"
                         >
-                            <MintForm account={account} />
+                            <MintForm account={account} active={active} />
                         </div>
                         <div className="tab-pane fade" id="profile">
                             <PresaleForm />

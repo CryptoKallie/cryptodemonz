@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 
 class PresaleForm extends Component {
-    constructor(props) {
-        super(props)
-    }
+
 
     render() {
         return (
             <div className="row">
-                <div className="col-lg-12 form-tabbed">
+                <div className="col-lg-8 form-tabbed">
                     <div className="form-group text-center">
                         <label htmlFor="exampleInputEmail1">
                             <img
