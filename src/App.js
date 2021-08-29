@@ -1,10 +1,13 @@
-import './App.css';
 import ConnectMetamask from './utils/metamask';
+import Navbar from './layout/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <ConnectMetamask />
+    <div>
+      <Navbar />
+      <div className="container container-body">
+        <ConnectMetamask />
+      </div>
     </div>
   );
 }
