@@ -22,6 +22,7 @@ const MintForm = ({ account, active }) => {
     }, [])
     */
 
+    //THROWS ERROR, Infura wont pass normal transaction
     const setValue = async () => {
         if (active) {
             try {
