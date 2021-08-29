@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Web3 from "web3";
 import mockABI from "../abis/Mock";
 
@@ -11,6 +11,8 @@ const MintForm = ({ account, active }) => {
         "0x4231AF7A21fF267d86Bf23032632E6726EB51e33"
     );
     const [value, setV] = React.useState(0);
+
+    const [ethPrice, setEthPrice] = useState(1);
 
     /*
     React.useEffect(() => {
@@ -63,15 +65,44 @@ const MintForm = ({ account, active }) => {
                             like to mint
                         </p>
                     </label>
-                    <input
-                        type="number"
-                        className="form-control number-custom"
-                        id="exampleInputEmail1"
-                        min="1"
-                        max="20"
-                        placeholder=""
-                        defaultValue="1"
-                    />
+                    <div className="row">
+                        <div className="col-md-5 text-center">
+                            <input
+                                type="number"
+                                className="form-control number-custom"
+                                id="exampleInputEmail1"
+                                min="1"
+                                max="20"
+                                placeholder=""
+                                defaultValue="1"
+                                onChange={event => setEthPrice(event.target.value)}
+                            />
+                        </div>
+
+                        <div className="col-sm-2 text-center">
+                            <h1 className="equals">=</h1>
+                        </div>
+
+                        <div className="col-md-5 text-center">
+                            <div class="input-group mb-3">
+                                <input
+                                    type="number"
+                                    className="form-control eth-custom"
+                                    id="exampleInputEmail1"
+                                    min="1"
+                                    max="20"
+                                    placeholder=""
+                                    defaultValue="1"
+                                    disabled
+                             
+                                    value={ethPrice * 0.06}
+                                />
+                                <span class="input-group-text">ETH</span>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <p>
                         <h1>{value}</h1>
                         <small>(Maximum of 20)</small>
