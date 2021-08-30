@@ -37,7 +37,7 @@ const PresaleForm = ({ account, active }) => {
 
     return (
         <div className="row">
-            <div className="col-lg-8 form-tabbed">
+            <div className="col-lg-12 form-tabbed">
                 <div className="form-group text-center">
                     {click ? (
                         <div class="alert alert-danger" role="alert">
@@ -74,7 +74,6 @@ const PresaleForm = ({ account, active }) => {
                             <span class="input-group-text">NFT</span>
                         </div>
 
-                        <p>Click to claim your tokens!</p>
                     </label>
                     <br />
                     <button
