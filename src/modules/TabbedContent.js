@@ -1,5 +1,6 @@
 import MintForm from "./MintForm";
 import PresaleForm from "./PresaleForm";
+import GuideForm from "./GuideForm";
 
 function TabbedContent({ account, active }) {
     return (

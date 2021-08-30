@@ -3,20 +3,18 @@ import Web3 from "web3";
 import DemonzABI from "../abis/Demonz";
 
 const PresaleForm = ({ account, active }) => {
-
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(
         DemonzABI,
         "0xAE16529eD90FAfc927D774Ea7bE1b95D826664E3"
     );
     const [amount, setAmount] = useState(1);
+    const [click, setClick] = useState(false);
 
     const buyToken = async () => {
         if (active) {
             try {
-                await contract.methods
-                    .preMint(amount)
-                    .send({ from: account });
+                await contract.methods.preMint(amount).send({ from: account });
             } catch (err) {
                 console.log(err);
             }
@@ -33,11 +31,21 @@ const PresaleForm = ({ account, active }) => {
         }
     };
 
+    const handleBuyOrder = () => {
+        setClick(true);
+    };
 
     return (
         <div className="row">
             <div className="col-lg-8 form-tabbed">
                 <div className="form-group text-center">
+                    {click ? (
+                        <div class="alert alert-danger" role="alert">
+                            Presale is disabled
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
                     <label htmlFor="exampleInputEmail1">
                         <img
                             src="images/Satan.gif"
@@ -49,7 +57,7 @@ const PresaleForm = ({ account, active }) => {
                         </h1>
                         <p>Pay your gas fee & claim your presale token</p>
                         <div class="input-group mb-3">
-                        {checkValue()}
+                            {checkValue()}
                             <input
                                 type="number"
                                 className="form-control number-custom"
@@ -59,8 +67,8 @@ const PresaleForm = ({ account, active }) => {
                                 placeholder=""
                                 value={amount}
                                 onChange={(event) => {
-                                        setAmount(event.target.value);
-                                    }}
+                                    setAmount(event.target.value);
+                                }}
                             />
 
                             <span class="input-group-text">NFT</span>
@@ -69,7 +77,11 @@ const PresaleForm = ({ account, active }) => {
                         <p>Click to claim your tokens!</p>
                     </label>
                     <br />
-                    <button type="button" className="btn btn-primary" onClick={buyToken}>
+                    <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleBuyOrder}
+                    >
                         Claim!
                     </button>
                 </div>
