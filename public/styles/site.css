@@ -19,7 +19,7 @@ src: local('Singo Italic'), url('SingoItalic-WymEV.woff') format('woff');
 }
 
 body {
-    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('/images/wallpaper.gif');
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('../images/wallpaper.gif');
     background-repeat: no-repeat;
     background-position: center center;
     -webkit-background-size: cover;
