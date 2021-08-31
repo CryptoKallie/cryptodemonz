@@ -9,7 +9,7 @@ const ConnectMetamask = ({
         <div>
             <a
                 className="nav-link meta-connect"
-                href="/#"
+                href="/spawn/#"
                 onClick={deactivateMetamask}
             >
                 Disconnect
@@ -26,7 +26,7 @@ const ConnectMetamask = ({
         <div>
             <a
                 className="nav-link meta-connect"
-                href="/#"
+                href="/spawn/#"
                 onClick={connectMetamask}
             >
                 Connect to Metamask
