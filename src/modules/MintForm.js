@@ -12,15 +12,18 @@ const MintForm = ({ account, active }) => {
     const [amount, setAmount] = useState(1);
     const [err, setErr] = useState(false);
     const [gasAlert, setGasAlert] = useState(false);
-
+    const errTest = false;
     const buyToken = async () => {
         if (active) {
             try {
-                setGasAlert(true)
-                //TODO custom gas
-                await contract.methods
-                    .mintToken(amount)
-                    .send({ from: account, value: amount * 60000000000000000 });
+                setGasAlert(true);
+                await contract.methods.mintToken(amount).send({
+                    from: account,
+                    value: amount * web3.utils.toWei("0.06", "ether"),
+                    gasLimit: "285000",
+                    maxPriorityFeePerGas: null,
+                    maxFeePerGas: null,
+                });
             } catch (err) {
                 console.log(err);
                 //TODO dont throw error alert if user just rejects transaction
