@@ -4,10 +4,10 @@ import GuideForm from "./GuideForm";
 
 function TabbedContent({ account, active }) {
     return (
-        <div class="row align-items-center h-100">
-            <div class="col"></div>
-            <div class="card mt-5">
-                <div class="card-body">
+        <div className="row align-items-center h-100">
+            <div className="col"></div>
+            <div className="card mt-5">
+                <div className="card-body">
                     <ul className="nav nav-tabs tabbed-navbar-custom">
                         <li className="nav-item">
                             <a

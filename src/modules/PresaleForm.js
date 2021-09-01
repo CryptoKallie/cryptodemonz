@@ -1,27 +1,27 @@
 import { useState } from "react";
-import Web3 from "web3";
-import DemonzABI from "../abis/Demonz";
+//import Web3 from "web3";
+// import DemonzABI from "../abis/Demonz";
 
 const PresaleForm = ({ account, active }) => {
-    const web3 = new Web3(window.ethereum);
-    const contract = new web3.eth.Contract(
-        DemonzABI,
-        "0xAE16529eD90FAfc927D774Ea7bE1b95D826664E3"
-    );
+    //const web3 = new Web3(window.ethereum);
+    // const contract = new web3.eth.Contract(
+    //     DemonzABI,
+    //     "0xAE16529eD90FAfc927D774Ea7bE1b95D826664E3"
+    // );
     const [amount, setAmount] = useState(1);
     const [click, setClick] = useState(false);
 
-    const buyToken = async () => {
-        if (active) {
-            try {
-                await contract.methods.preMint(amount).send({ from: account });
-            } catch (err) {
-                console.log(err);
-            }
-        } else {
-            alert("please connect to metamask");
-        }
-    };
+    // const buyToken = async () => {
+    //     if (active) {
+    //         try {
+    //             await contract.methods.preMint(amount).send({ from: account });
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     } else {
+    //         alert("please connect to metamask");
+    //     }
+    // };
 
     const checkValue = () => {
         if (amount <= 0) {
@@ -40,7 +40,7 @@ const PresaleForm = ({ account, active }) => {
             <div className="col-lg-12 form-tabbed">
                 <div className="form-group text-center">
                     {click ? (
-                        <div class="alert alert-danger" role="alert">
+                        <div className="alert alert-danger" role="alert">
                             Presale is disabled
                         </div>
                     ) : (
@@ -56,7 +56,7 @@ const PresaleForm = ({ account, active }) => {
                             <u>Presale</u>
                         </h1>
                         <p>Pay your gas fee & claim your presale token</p>
-                        <div class="input-group mb-3">
+                        <div className="input-group mb-3">
                             {checkValue()}
                             <input
                                 type="number"
@@ -71,7 +71,7 @@ const PresaleForm = ({ account, active }) => {
                                 }}
                             />
 
-                            <span class="input-group-text">NFT</span>
+                            <span className="input-group-text">NFT</span>
                         </div>
 
                     </label>

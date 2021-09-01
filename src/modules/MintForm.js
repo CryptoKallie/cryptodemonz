@@ -1,3 +1,4 @@
+import { getQueriesForElement } from "@testing-library/react";
 import { useState } from "react";
 import Web3 from "web3";
 import DemonzABI from "../abis/Demonz";
@@ -10,27 +11,33 @@ const MintForm = ({ account, active }) => {
     );
     const [ethPrice, setEthPrice] = useState(1);
     const [amount, setAmount] = useState(1);
-    const [err, setErr] = useState(false);
-    const [gasAlert, setGasAlert] = useState(false);
-    const errTest = false;
+    const [popupData, setPopupData] = useState([false]);
+    const [gasPrice, setGasPrice] = useState('');
+
+
     const buyToken = async () => {
+            getGasPrice();
         if (active) {
             try {
-                setGasAlert(true);
+                
+                
+                setPopupData(['gas'])
+
                 await contract.methods.mintToken(amount).send({
                     from: account,
                     value: amount * web3.utils.toWei("0.06", "ether"),
-                    gasLimit: "285000",
+                    //gasLimit: "285000",
+                    gasLimit: gasPrice,
                     maxPriorityFeePerGas: null,
                     maxFeePerGas: null,
                 });
             } catch (err) {
                 console.log(err);
                 //TODO dont throw error alert if user just rejects transaction
-                setErr(true);
+                setPopupData(['error', err]);
             }
         } else {
-            alert("please connect to metamask");
+            setPopupData(['metamask'])
         }
     };
     //this has a visual bug, user can put as many zeros as he wants before first non-zero int
@@ -41,34 +48,86 @@ const MintForm = ({ account, active }) => {
             setEthPrice(20);
         }
     };
+
+    // const getGasLimit = () => {
+    //     contract.methods.mintToken(amount)
+    //     .estimateGas(
+    //         {
+    //             from: account,
+    //             gasPrice: _gasPrice
+    //         }, function(error, estimatedGas) {
+    //         }
+    //     )
+    // });
+    // }
+
+    const getGasPrice = () => {
+        web3.eth.getGasPrice()
+        .then(price => {
+            let gwei = web3.utils.fromWei(price, 'gwei')
+            console.log(gwei);
+        });
+    }
+
+    const hidePopup = () => {
+        setPopupData([false]);
+    }
+
+    const errorController = () => {
+        if (popupData[0] === false) {
+            return;
+        } else
+        if (popupData[0] === 'error') {
+            return (
+                <div className="modal-container">
+                    <div className="alert alert-dismissible alert-danger">
+                        <button type="button" className="btn-close" onClick={hidePopup}></button>
+                        <strong>Oh snap!</strong> 
+                        <p className="text-dark">It looks like an Error occured, please copy the text below and send a PM to the CDZ Report bot</p>
+                        <textarea className="form-control" id="exampleTextarea" rows="3">
+                            {popupData[1]}
+                        </textarea>
+                    </div>
+                </div>
+            );
+        } else if (popupData[0] === 'gas') {
+            return (
+                <div className="modal-container">
+                    <div className="alert alert-dismissible alert-warning">
+                        <button type="button" className="btn-close" onClick={hidePopup}></button>
+                        <strong>Warning!</strong> 
+                            <p className="text-dark">Please MAKE SURE that suggested fees are
+                            normal, if not edit!. If you don't know
+                            how, please open ticket on our discord
+                            server. We are trying to resolve this
+                            problem.</p>
+                    </div>
+                </div>
+            )
+        } else if (popupData[0] === 'metamask') {
+            return (
+                <div className="modal-container">
+                        <div className="alert alert-dismissible alert-warning">
+                            <button type="button" className="btn-close" onClick={hidePopup}></button>
+                            <strong>Warning!</strong> 
+                                <p className="text-dark">Please connect metamask with the button in the top right corner</p>
+                    </div>
+                </div>
+            )
+        } else {
+            return <p>THIS IS A TEST</p>
+        }
+    }
+
     return (
         <div>
-            {err ? (
-                <div class="alert alert-danger" role="alert">
-                    You have encountered an error or rejected transaction,
-                    before opening ticket on our discord server, please consider
-                    that cold wallets aren't supported. In order to renew
-                    transaction, refresh the page.
-                </div>
-            ) : (
+           {errorController()}
+
                 <div className="row">
                     <div className="col-lg-12 form-tabbed">
                         <div className="form-group text-center">
                             <label htmlFor="exampleInputEmail1">
-                                {gasAlert ? (
-                                    <div
-                                        class="alert alert-warning"
-                                        role="alert"
-                                    >
-                                        Please MAKE SURE that suggested fees are
-                                        normal, if not edit!. If you don't know
-                                        how, please open ticket on our discord
-                                        server. We are trying to resolve this
-                                        problem.
-                                    </div>
-                                ) : (
-                                    <div></div>
-                                )}
+
                                 <img
                                     src="images/welcome.gif"
                                     className="welcome-gif"
@@ -81,7 +140,7 @@ const MintForm = ({ account, active }) => {
                             </label>
                             <div className="row">
                                 <div className="col-md-5 text-center">
-                                    <div class="input-group mb-3">
+                                    <div className="input-group mb-3">
                                         {checkValue()}
                                         <input
                                             type="number"
@@ -96,7 +155,7 @@ const MintForm = ({ account, active }) => {
                                                 setAmount(event.target.value);
                                             }}
                                         />
-                                        <span class="input-group-text">
+                                        <span className="input-group-text">
                                             NFT
                                         </span>
                                     </div>
@@ -107,7 +166,7 @@ const MintForm = ({ account, active }) => {
                                 </div>
 
                                 <div className="col-md-5 text-center">
-                                    <div class="input-group mb-3">
+                                    <div className="input-group mb-3">
                                         <input
                                             type="number"
                                             className="form-control eth-custom"
@@ -115,11 +174,10 @@ const MintForm = ({ account, active }) => {
                                             min="1"
                                             max="20"
                                             placeholder=""
-                                            defaultValue="1"
                                             disabled
                                             value={ethPrice * 0.06}
                                         />
-                                        <span class="input-group-text">
+                                        <span className="input-group-text">
                                             ETH
                                         </span>
                                     </div>
@@ -127,7 +185,7 @@ const MintForm = ({ account, active }) => {
                             </div>
 
                             <p>
-                                <small>(Maximum of 20)</small>
+                                <small>(Maximum of 20)</small> <br />
                             </p>
                             <br />
                             <button

@@ -5,7 +5,7 @@ import { useWeb3React } from "@web3-react/core";
 import { injected } from "./utils/connectors.js";
 
 function App() {
-    const { active, account, library, connector, activate, deactivate } =
+    const { active, account, activate, deactivate } =
         useWeb3React();
 
     const connectMetamask = async () => {
