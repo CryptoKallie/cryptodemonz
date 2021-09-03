@@ -2,12 +2,15 @@ import { getQueriesForElement } from "@testing-library/react";
 import { useState } from "react";
 import Web3 from "web3";
 import DemonzABI from "../abis/Demonz";
+import DemonzTesting from "../abis/DemonzTesting.json";
 
 const MintForm = ({ account, active }) => {
     const web3 = new Web3(window.ethereum);
     const contract = new web3.eth.Contract(
         DemonzABI,
-        "0xAE16529eD90FAfc927D774Ea7bE1b95D826664E3"
+        "0xAE16529eD90FAfc927D774Ea7bE1b95D826664E3",
+        //DemonzTesting,
+        //"0xa65314fD720aD81af79521D7634bE6b075C7981D" //testing
     );
     const [ethPrice, setEthPrice] = useState(1);
     const [amount, setAmount] = useState(1);
@@ -16,22 +19,24 @@ const MintForm = ({ account, active }) => {
 
     const buyToken = async () => {
 
+
         let gasLimit = Math.trunc(await getGasLimit());
 
         if (active) {
             try {
                 setPopupData(["gas"]);
 
-                await contract.methods.mintToken(amount).send({
+                contract.methods.mintToken(amount).send({
                     from: account,
                     value: amount * web3.utils.toWei("0.06", "ether"),
-                    gasPrice:  getGas(),
-                    gasLimit: gasLimit,
-                    //gasLimit: "285000",
-                    maxPriorityFeePerGas: null,
-                    maxFeePerGas: null,
-                    nonce: null,
+                    //gasLimit: gasLimit,
+                    gasLimit: amount * "300000",
+                    //maxPriorityFeePerGas: null,
+                    //maxFeePerGas: null,
+                    //nonce: null,
                 });
+
+      
             } catch (err) {
                 console.log(err);
                 //TODO dont throw error alert if user just rejects transaction
@@ -40,6 +45,10 @@ const MintForm = ({ account, active }) => {
         } else {
             setPopupData(["metamask"]);
         }
+     
+
+
+    
     };
     //this has a visual bug, user can put as many zeros as he wants before first non-zero int
     //TODO find better solution
@@ -112,7 +121,7 @@ const MintForm = ({ account, active }) => {
                             Gas fee problem is partially resolved, it will give
                             you reasonable price which is under 200$. But
                             consider that it's statically adjuted (current
-                            default is 285000 limit). We are working to develop
+                            default is 300000 limit). We are working to develop
                             gas management strategy and offer the best prices,
                             this will be available in next patch (v0.0.3)
                         </p>
