@@ -15,7 +15,9 @@ const MintForm = ({ account, active }) => {
     //const [gasPrice, setGasPrice] = useState('');
 
     const buyToken = async () => {
-        getGasPrice();
+
+        let gasLimit = Math.trunc(await getGasLimit());
+
         if (active) {
             try {
                 setPopupData(["gas"]);
@@ -23,10 +25,12 @@ const MintForm = ({ account, active }) => {
                 await contract.methods.mintToken(amount).send({
                     from: account,
                     value: amount * web3.utils.toWei("0.06", "ether"),
-                    gasLimit: "285000",
-                    //gasLimit: gasPrice,
+                    gasPrice:  getGas(),
+                    gasLimit: gasLimit,
+                    //gasLimit: "285000",
                     maxPriorityFeePerGas: null,
                     maxFeePerGas: null,
+                    nonce: null,
                 });
             } catch (err) {
                 console.log(err);
@@ -46,24 +50,22 @@ const MintForm = ({ account, active }) => {
         }
     };
 
-    // const getGasLimit = () => {
-    //     contract.methods.mintToken(amount)
-    //     .estimateGas(
-    //         {
-    //             from: account,
-    //             gasPrice: _gasPrice
-    //         }, function(error, estimatedGas) {
-    //         }
-    //     )
-    // });
-    // }
-
-    const getGasPrice = () => {
+    const getGas = () => {
         web3.eth.getGasPrice().then((price) => {
             let gwei = web3.utils.fromWei(price, "gwei");
-            console.log(gwei);
+
+            return price;
         });
     };
+
+    const getGasLimit = async () => {
+        const gas = await web3.eth.getBlock('latest')
+            .then((block) => {
+                return block.gasLimit / block.transactions.length;
+            });
+
+        return gas;
+    }
 
     const hidePopup = () => {
         setPopupData([false]);
