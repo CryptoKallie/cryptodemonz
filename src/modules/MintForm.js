@@ -15,41 +15,50 @@ const MintForm = ({ account, active }) => {
     const [ethPrice, setEthPrice] = useState(1);
     const [amount, setAmount] = useState(1);
     const [popupData, setPopupData] = useState([false]);
+    const [mintEnabled, setMintEnabled] = useState(true);
     //const [gasPrice, setGasPrice] = useState('');
 
     const buyToken = async () => {
+        checkTotalSupply();
 
-
-        let gasLimit = Math.trunc(await getGasLimit());
-
-        if (active) {
-            try {
-                setPopupData(["gas"]);
-
-                contract.methods.mintToken(amount).send({
-                    from: account,
-                    value: amount * web3.utils.toWei("0.06", "ether"),
-                    //gasLimit: gasLimit,
-                    gasLimit: amount * "300000",
-                    //maxPriorityFeePerGas: null,
-                    //maxFeePerGas: null,
-                    //nonce: null,
-                });
-
-      
-            } catch (err) {
-                console.log(err);
-                //TODO dont throw error alert if user just rejects transaction
-                setPopupData(["error", err]);
-            }
-        } else {
-            setPopupData(["metamask"]);
-        }
-     
-
-
+        if (mintEnabled) {
+            if (active) {
+                try {
+                    setPopupData(["gas"]);
     
+                    contract.methods.mintToken(amount).send({
+                        from: account,
+                        value: amount * web3.utils.toWei("0.06", "ether"),
+                        gasLimit: amount * "300000",
+                        maxPriorityFeePerGas: null,
+                        maxFeePerGas: null,
+                    });
+    
+          
+                } catch (err) {
+                    console.log(err);
+                    //TODO dont throw error alert if user just rejects transaction
+                    setPopupData(["error", err]);
+                }
+            } else {
+                setPopupData(["metamask"]);
+            }
+
+        }
+
     };
+
+    const checkTotalSupply = () => {
+        contract.methods.totalSupply().call()
+        .then(res => {
+            if (res === 10000) {
+                setMintEnabled(false);
+                setPopupData(["mintComplete"]);
+                console.log(res)
+            }
+        });
+    }
+
     //this has a visual bug, user can put as many zeros as he wants before first non-zero int
     //TODO find better solution
     //note, if setEthPrice(0) is not a good solution
@@ -59,22 +68,6 @@ const MintForm = ({ account, active }) => {
         }
     };
 
-    const getGas = () => {
-        web3.eth.getGasPrice().then((price) => {
-            let gwei = web3.utils.fromWei(price, "gwei");
-
-            return price;
-        });
-    };
-
-    const getGasLimit = async () => {
-        const gas = await web3.eth.getBlock('latest')
-            .then((block) => {
-                return block.gasLimit / block.transactions.length;
-            });
-
-        return gas;
-    }
 
     const hidePopup = () => {
         setPopupData([false]);
@@ -83,6 +76,24 @@ const MintForm = ({ account, active }) => {
     const errorController = () => {
         if (popupData[0] === false) {
             return;
+        } else if (popupData[0] === "mintComplete") {
+            return (
+                <div className="modal-container">
+                    <div className="alert alert-dismissible alert-success">
+                        <button
+                            type="button"
+                            className="btn-close"
+                            onClick={hidePopup}
+                        ></button>
+                        <strong>Thats all!</strong>
+                        <p className="text-dark">
+                           Wow it looks like every single Crypto Demonz v1 has been minted! <br />
+                           We want to thank each and every one of you for the support you have provided our project! <br />
+                           Gear up for the Crypto Demonz v2 Spawn.
+                        </p>
+                    </div>
+                </div>
+            );
         } else if (popupData[0] === "error") {
             return (
                 <div className="modal-container">
